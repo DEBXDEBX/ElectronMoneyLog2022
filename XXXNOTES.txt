@@ -2,6 +2,7 @@
 
  get rid of developer tools
  to package for windows run=>
+ replace ElectronTypeGame with your project name
  electron-packager . ElectonTypGame --platform=win32 --icon=build/icon.ico
 
  electron-packager is installed globally
