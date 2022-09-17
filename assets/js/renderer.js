@@ -207,6 +207,11 @@ window.api.handleNewYear((event, { name, path }) => {
     display.showAlert("Error creating a year", "error");
     return;
   }
+  if (isNaN(name)) {
+    display.showAlert("You have to enter number's to create a year", "error");
+    wrongAudio.play();
+    return;
+  }
   let pathIsTaken = false;
 
   for (const year of arrayOfYearObjs) {
