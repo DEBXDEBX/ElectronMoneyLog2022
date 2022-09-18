@@ -613,10 +613,6 @@ window.api.handleOpenFile((event, data) => {
   // push the year obj into the array of year Objects
   arrayOfYearObjs.push(newYear);
   sortArrayByName(arrayOfYearObjs);
-  // write the year object to disk
-  // newYear.writeYearToHardDisk(fs, display);
-  // saveYear(arrayOfYearObjs[yearIndex]);
-  saveYear(data);
   display.paintYearTabs(mapOutKey("name", arrayOfYearObjs));
   return;
 });
