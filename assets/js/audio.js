@@ -13,5 +13,6 @@ class Audio {
     this.btnAudio = document.querySelector("#btnAudio");
     this.cancelAudio = document.querySelector("#cancelAudio");
     this.wrongAudio = document.querySelector("#wrongAudio");
+    this.clickAudio = document.querySelector("#clickAudio");
   } // End constructor
 }

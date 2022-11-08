@@ -560,6 +560,7 @@ const saveYear = (year) => {
 }; //End saveYear
 
 window.api.handleFontSizeChange((event, fontSize) => {
+  sound.btnAudio.play();
   switch (fontSize) {
     case "x-small":
       el.root.style.fontSize = "10px";
@@ -611,6 +612,7 @@ window.api.handleShowAlert((event, { message, msgType }) => {
   display.showAlert(message, msgType);
 });
 window.api.handleShowSettingsForm((event, noData) => {
+  sound.clickAudio.play();
   loadUpSettingsForm();
   display.showSettingsForm();
 });

@@ -10,6 +10,8 @@ html,
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.7em;
+  transition: background-color 1.7s ease;
+  height: 100vh;
 }
 
 a {
@@ -25,12 +27,7 @@ h1 {
   text-shadow: 2px 2px black;
   text-align: center;
 }
-.red {
-  color: red;
-}
-.normal {
-  color: var(--primary-color);
-}
+
 h6 {
   margin: 10px;
   text-align: center;
@@ -57,42 +54,25 @@ nav ul li {
   border-radius: 10px 10px 0px 0px;
   font-weight: 700;
   font-size: 1.2rem;
-  transition: color 0.3s, box-shadow 0.7s, transform 0.7s;
-  transition-timing-function: cubic-bezier(0.45, 1.87, 0.62, 1.6);
+  transition: transform 0.9s cubic-bezier(0.45, 1.87, 0.62, 1.6);
 }
 
 nav ul li:hover {
   color: white;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
 }
-/* CODE FOR MESSAGES  */
-.success,
-.error {
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-  border-radius: 25px;
-  margin: auto;
-}
-.error {
-  color: red;
-}
-.success {
-  color: #2de11d;
-}
-.black {
-  background-color: black;
-}
-.redBorder {
-  border: 20px solid red;
-}
-.greenBorder {
-  border: 20px solid #2de11d;
-}
-/* END CODE FOR MESSAGES  */
+
 .active {
   color: white;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 5px 4px 9px black;
   transform: scale(1.1);
+}
+.red {
+  color: red;
+}
+.normal {
+  color: var(--primary-color);
 }
 #yearHeading,
 #monthHeading,
@@ -116,6 +96,9 @@ nav ul li:hover {
 }
 #taxInput {
   margin: 10px 10px;
+}
+#taxInputCheckBox {
+  margin-right: 6px;
 }
 #taxSpan {
   margin: 0 10px;
@@ -145,10 +128,17 @@ nav li.transaction:nth-child(even) {
   background-color: #e4e2e2;
 }
 nav li.transaction:hover {
-  color: #e217a2;
+  color: #100cf7;
+}
+​input[type="radio"] {
+  margin: 10px;
+  font-size: 16px;
 }
 input[type="radio"]:hover {
   cursor: pointer;
+}
+input[type="checkbox"] {
+  margin-left: 22px;
 }
 input[type="checkbox"]:hover {
   cursor: pointer;
@@ -179,6 +169,9 @@ input[type="checkbox"]:hover {
   color: #007bff;
   font-size: 14px;
 }
+#autoLoadList {
+  margin-left: 45px;
+}
 #settingsForm {
   background-color: white;
   border: 20px solid white;
@@ -193,6 +186,7 @@ input[type="checkbox"]:hover {
 .radio div {
   margin: 7px;
 }
+
 .setFlex {
   display: flex;
   flex-direction: column;
@@ -204,13 +198,34 @@ input[type="checkbox"]:hover {
   border-radius: 22px;
   box-shadow: 5px 4px 9px black;
 }
+
 @media screen and (max-width: 940px) {
   .radio {
-    /* display: flex; */
     flex-direction: column;
   }
 }
-
-#autoLoadList {
-  margin-left: 45px;
+/* CODE FOR MESSAGES  */
+.success,
+.error {
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  border-radius: 25px;
+  margin: auto;
 }
+.error {
+  color: red;
+}
+.success {
+  color: #2de11d;
+}
+.black {
+  background-color: black;
+}
+.redBorder {
+  border: 20px solid red;
+}
+.greenBorder {
+  border: 20px solid #2de11d;
+}
+/* END CODE FOR MESSAGES  */
