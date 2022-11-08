@@ -1,4 +1,4 @@
 node_modules/*
 dist/*
-# ElectonTypGame-win32-x64/*
 MoneyLog-win32-x64/*
+.vscode/*

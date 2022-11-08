@@ -1,21 +1,12 @@
 "use strict";
 
-// Select audio files
-const addAudio = document.querySelector("#addAudio");
-const addImageAudio = document.querySelector("#addImageAudio");
-const deleteAudio = document.querySelector("#deleteAudio");
-const warningEmptyAudio = document.querySelector("#warningEmptyAudio");
-const warningSelectAudio = document.querySelector("#warningSelectAudio");
-const warningNameTakenAudio = document.querySelector("#warningNameTakenAudio");
-const tabAudio = document.querySelector("#tabAudio");
-const btnAudio = document.querySelector("#btnAudio");
-const cancelAudio = document.querySelector("#cancelAudio");
-const wrongAudio = document.querySelector("#wrongAudio");
 // Global variable's
 // This is the Main array that holds all the year objects
 const arrayOfYearObjs = [];
 // create elements object
 const el = new Elements();
+// create audio object
+const sound = new Audio();
 // create display object
 const display = new Display(el, $);
 // create tax percent
@@ -85,8 +76,7 @@ function pushFileSettingsContainer(filePath) {
     }
   }
   if (isTaken) {
-    // warningNameTakenAudio.play();
-    warningNameTakenAudio.play();
+    sound.warningNameTakenAudio.play();
     display.showAlert("That file is already loaded!", "error");
     return;
   }
@@ -203,13 +193,13 @@ function applySettings(settings) {
 
 window.api.handleNewYear((event, { name, path }) => {
   if (!name || !path) {
-    wrongAudio.play();
+    sound.wrongAudio.play();
     display.showAlert("Error creating a year", "error");
     return;
   }
   if (isNaN(name)) {
     display.showAlert("You have to enter number's to create a year", "error");
-    wrongAudio.play();
+    sound.wrongAudio.play();
     return;
   }
   let pathIsTaken = false;
@@ -294,7 +284,7 @@ el.yearList.addEventListener("click", (e) => {
       return;
     }
     yearIndex = index;
-    tabAudio.play();
+    sound.tabAudio.play();
     // get the array of months and send it to display
     display.paintMonthTabs(
       mapOutKey("name", arrayOfYearObjs[yearIndex].arrayOfMonthObjects)
@@ -322,7 +312,7 @@ el.monthList.addEventListener("click", (e) => {
       return;
     }
     monthIndex = index;
-    tabAudio.play();
+    sound.tabAudio.play();
     // get the array of Transactions and send it to display
     display.paintTransactions(
       arrayOfYearObjs[yearIndex].arrayOfMonthObjects[monthIndex]
@@ -348,7 +338,7 @@ el.transactionList.addEventListener("click", (e) => {
   // event delegation
   if (e.target.classList.contains("deleteTrans")) {
     if (!e.ctrlKey) {
-      warningNameTakenAudio.play();
+      sound.warningNameTakenAudio.play();
       display.showAlert(
         "Please hold down control and click on the trash can to delete!",
         "error"
@@ -357,7 +347,7 @@ el.transactionList.addEventListener("click", (e) => {
     }
 
     if (e.ctrlKey) {
-      deleteAudio.play();
+      sound.deleteAudio.play();
       display.showAlert("You deleted a transaction!", "success", 2500);
       // delete transaction
       arrayOfYearObjs[yearIndex].arrayOfMonthObjects[
@@ -385,26 +375,26 @@ el.transactionSubmitBtn.addEventListener("click", (e) => {
     el.storeItemInput.focus();
   }, 2000);
   if (!date) {
-    warningEmptyAudio.play();
+    sound.warningEmptyAudio.play();
     display.showAlert("Please enter a date!", "error");
     return;
   }
 
   if (!storeItem) {
-    warningEmptyAudio.play();
+    sound.warningEmptyAudio.play();
     display.showAlert("Please enter a store or item!", "error");
     return;
   }
 
   if (!price) {
-    warningEmptyAudio.play();
+    sound.warningEmptyAudio.play();
     display.showAlert("Please enter a price!", "error");
     return;
   }
   price = Number(price);
 
   if (isNaN(price)) {
-    warningNameTakenAudio.play();
+    sound.warningNameTakenAudio.play();
     display.showAlert("Please enter a number for the price!", "error");
     return;
   }
@@ -419,7 +409,7 @@ el.transactionSubmitBtn.addEventListener("click", (e) => {
     newTransaction = new Transaction(date, storeItem, price);
   }
   display.showAlert("You added a transaction!", "success");
-  addAudio.play();
+  sound.addAudio.play();
   // push new transaction into array
   arrayOfYearObjs[yearIndex].arrayOfMonthObjects[
     monthIndex
@@ -435,7 +425,7 @@ el.transactionSubmitBtn.addEventListener("click", (e) => {
 
 // transaction form clear Btn
 el.transactionClearBtn.addEventListener("click", (e) => {
-  btnAudio.play();
+  sound.btnAudio.play();
   el.storeItemInput.value = "";
   el.priceInput.value = "";
   // set time out to focus
@@ -470,7 +460,7 @@ el.saveSettingsSubmitBtn.addEventListener("click", (e) => {
   settingsObj.autoLoad = el.autoLoadCheckBox.checked;
   // save the object
   settingsStorage.saveSettings(settingsObj);
-  addAudio.play();
+  sound.addAudio.play();
   // reset form
   el.settingsForm.reset();
   if (settingsObj.autoLoad) {
@@ -492,7 +482,7 @@ el.saveSettingsSubmitBtn.addEventListener("click", (e) => {
 
 // when You click on settings form cancel Btn
 el.settingsCancelBtn.addEventListener("click", (e) => {
-  cancelAudio.play();
+  sound.cancelAudio.play();
   // hide form
   display.displayNone(el.settingsForm);
   display.paintYearTabs(mapOutKey("name", arrayOfYearObjs));
@@ -501,7 +491,7 @@ el.settingsCancelBtn.addEventListener("click", (e) => {
 
 // when You click on settings form factory reset btn
 el.factoryResetBtn.addEventListener("click", (e) => {
-  btnAudio.play();
+  sound.btnAudio.play();
   const settingsStorage = new SettingsStorage();
   settingsStorage.clearFileFromLocalStorage();
   loadUpSettingsForm();
@@ -509,7 +499,7 @@ el.factoryResetBtn.addEventListener("click", (e) => {
 
 // When You click on settings form add path to autoload Btn
 el.settingsAddPathBtn.addEventListener("click", async (e) => {
-  // addImageAudio.play();
+  sound.addImageAudio.play();
   window.api.showOpenDialog();
 });
 
@@ -527,7 +517,7 @@ window.api.handleAuotLoadPaths((event, fileNames) => {
       settingsArrayContainer.push(filePath);
     }
   }
-  addImageAudio.play();
+  sound.addImageAudio.play();
   display.showAutoLoadList(settingsArrayContainer);
 });
 
@@ -536,7 +526,7 @@ el.autoLoadList.addEventListener("click", (e) => {
   // event delegation
   if (e.target.classList.contains("deleteFile")) {
     if (!e.ctrlKey) {
-      wrongAudio.play();
+      sound.wrongAudio.play();
       display.showAlert(
         "You have to hold down ctrl key to make a deletion",
         "error"
@@ -554,7 +544,7 @@ el.autoLoadList.addEventListener("click", (e) => {
       }
       // delete path
       settingsArrayContainer.splice(deleteIndex, 1);
-      warningSelectAudio.play();
+      sound.warningSelectAudio.play();
       // update Form
       display.showAutoLoadList(settingsArrayContainer);
     }
@@ -638,6 +628,6 @@ window.api.handleAuotLoadPaths((event, fileNames) => {
       settingsArrayContainer.push(filePath);
     }
   }
-  addImageAudio.play();
+  sound.addImageAudio.play();
   display.showAutoLoadList(settingsArrayContainer);
 });
